@@ -1,144 +1,189 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ===== GLOBAL RESET ===== */
+/* ===== RESET ===== */
 * {
   box-sizing: border-box;
   font-family: "Inter", "Segoe UI", Roboto, sans-serif;
 }
 
+/* ===== PAGE ===== */
+body {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
 /* ===== CONTAINER ===== */
 .main-container {
-  padding: 20px;
-  background-color: #f5f7fa;
+  padding: 20px 24px;
   min-height: 100vh;
+  background-color: #f8fafc;
 }
 
-/* ===== INPUT & BUTTON ===== */
-.search-box {
-  padding: 10px 14px;
+/* ===== TOP TOOLBAR ===== */
+.watchlist-toolbar,
+.flex-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* ===== SEARCH BOX ===== */
+.symbol-search-wrapper {
+  position: relative;
   width: 260px;
+}
+
+.search-input,
+.search-box {
+  width: 100%;
+  padding: 9px 12px;
   font-size: 14px;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
   border-radius: 6px;
-  border: 1px solid #ccc;
   outline: none;
-  margin-right: 10px;
 }
 
-.search-box:focus {
+.search-input::placeholder {
+  color: #9ca3af;
+}
+
+.search-input:focus {
   border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
 }
 
-.subscribe-btn {
-  padding: 10px 18px;
+/* ===== DROPDOWN ===== */
+.dropdown {
+  position: absolute;
+  top: 42px;
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  max-height: 240px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.dropdown-item {
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #0f172a;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f5f9;
+}
+
+.dropdown-item.disabled {
+  color: #9ca3af;
+  cursor: default;
+  text-align: center;
+}
+
+/* ===== SUBSCRIBE BUTTON ===== */
+.subscribe-btn,
+.add-btn {
+  padding: 9px 16px;
   background-color: #2563eb;
-  color: white;
+  color: #ffffff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 500;
 }
 
-.subscribe-btn:hover {
+.subscribe-btn:hover,
+.add-btn:hover {
   background-color: #1d4ed8;
 }
 
 /* ===== TABLE ===== */
 .trade-table {
   width: 100%;
-  margin-top: 20px;
   border-collapse: collapse;
-  background: white;
+  background-color: #ffffff;
   border-radius: 8px;
   overflow: hidden;
   font-size: 13px;
 }
 
+/* ===== TABLE HEADER ===== */
 .trade-table th {
-  background-color: #111827;
-  color: white;
   padding: 10px;
+  background-color: #f1f5f9;
+  color: #475569;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
   text-align: center;
   white-space: nowrap;
 }
 
+/* ===== TABLE ROW ===== */
 .trade-table td {
-  padding: 8px;
+  padding: 9px;
   text-align: center;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #f1f5f9;
 }
 
-/* ===== ROW HOVER ===== */
+/* ===== HOVER EFFECT ===== */
 .trade-table tbody tr:hover {
-  background-color: #f1f5f9;
+  background-color: #f8fafc;
 }
 
 /* ===== PRICE COLORS ===== */
 .price-up {
-  background-color: #dcfce7 !important;
+  color: #16a34a;
+  font-weight: 600;
+  background-color: #16a34a3c;
 }
 
 .price-down {
-  background-color: #fee2e2 !important;
+  color: #dc2626;
+  font-weight: 600;
+  background-color: #dc262641;
 }
+
 .price-neutral {
-  background-color: rgba(255, 255, 255, 0.546) !important;
+  color: #0f172a;
+  font-weight: 600;
+
 }
+
 /* ===== ACTION BUTTON ===== */
 .unsubscribe-btn {
-  padding: 6px 12px;
-  background-color: #ef4444;
-  color: white;
+  background: none;
+  color: #dc2626;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
   font-size: 12px;
 }
 
 .unsubscribe-btn:hover {
-  background-color: #dc2626;
+  text-decoration: underline;
 }
 
-/* ===== FOOTER INFO ===== */
+/* ===== EMPTY STATE ===== */
+.no-data {
+  padding: 28px;
+  text-align: center;
+  color: #64748b;
+}
+
+/* ===== FOOTER ===== */
 .total-subscribed {
-  margin-top: 10%;
-  font-weight: 600;
-  color: #111827;
+  margin-top: 12px;
+  font-size: 13px;
+  color: #475569;
 }
 
+/* ===== SCROLLBAR (SUBTLE) ===== */
+.dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dropdown::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
