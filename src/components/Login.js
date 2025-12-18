@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Login({ onSuccess, error }) {
@@ -16,6 +16,20 @@ export default function Login({ onSuccess, error }) {
     navigate("/mainList");
   };
 
+  useEffect(() => {
+    const savedUser = localStorage.getItem("username");
+    const savedPass = localStorage.getItem("password");
+
+    if (savedUser && savedPass) {
+      setUsername(savedUser);
+      setPassword(savedPass);
+
+      // 🔑 IMPORTANT: authenticate, not just navigate
+      onSuccess(savedUser, savedPass);
+      navigate("/mainList");
+    }
+  }, []);
+
   return (
     <div className="login-page">
       <div className="login-card">
@@ -27,6 +41,7 @@ export default function Login({ onSuccess, error }) {
             type="text"
             placeholder="Username"
             onChange={e => setUsername(e.target.value)}
+            value={username}
           />
 
           <input

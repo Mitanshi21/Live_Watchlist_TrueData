@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+import { flushSync } from "react-dom";
 
 export default function useTradeSocket(criedential) {
     const ws = useRef(null);
@@ -16,7 +17,6 @@ export default function useTradeSocket(criedential) {
             return;
         } else {
             const url = `wss://push.truedata.in:8082?user=${criedential.username}&password=${criedential.password}`
-
             ws.current = new WebSocket(url);
 
             ws.current.onopen = () => {
@@ -31,6 +31,9 @@ export default function useTradeSocket(criedential) {
                 if (response['message'] === "Invalid User Credentials") {
                     setAuthMessage("Invalid Username or Password!!")
                     setIsConnected(false)
+                }else{
+                    localStorage.setItem('username',criedential.username)
+                    localStorage.setItem('password',criedential.password)
                 }
 
                 if (response['trade']) {
@@ -145,5 +148,23 @@ export default function useTradeSocket(criedential) {
         }
     }
 
-    return { tradeData, totalSubscribed, sendRequest, onUnsubscribe, symbolIdName, isConnected, authMessage }
+    const onLogout = () =>{
+        if (ws.current && ws.current.readyState === WebSocket.OPEN) {
+            const reqMsg = {
+                method:'logout'
+            }
+            ws.current.send(JSON.stringify(reqMsg))
+
+            localStorage.removeItem('password')
+            setIsConnected(false)
+            setAuthMessage("")
+            setTradeData({})
+            setTotalSubscribed(0)
+            setSymbolIdName({})
+        }else{
+            console.log('WebSocket is not Open.');
+        }
+    }
+
+    return { tradeData, totalSubscribed, sendRequest, onUnsubscribe, symbolIdName, isConnected, authMessage, onLogout }
 }

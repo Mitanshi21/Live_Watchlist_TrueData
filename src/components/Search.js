@@ -9,10 +9,10 @@ export default function Search({allSymbols=[], onAddSymbol}) {
         )
         .slice(0, 30);
 
-    const handleAdd = () =>{
+    const handleAdd = (sym) =>{
         if(!search)
             return
-        onAddSymbol(search)
+        onAddSymbol(sym || search)
         setSearch("")
         setShowDropdown(false)
     }
@@ -44,6 +44,7 @@ export default function Search({allSymbols=[], onAddSymbol}) {
                                     className="dropdown-item"
                                     onClick={() => {
                                         setSearch(sym);
+                                        handleAdd(sym)
                                         setShowDropdown(false);
                                     }}
                                 >
@@ -55,12 +56,12 @@ export default function Search({allSymbols=[], onAddSymbol}) {
                 )}
             </div>
 
-            <button
+            {/* <button
                 className="add-btn"
                 onClick={handleAdd}
             >
                 + Add
-            </button>
+            </button> */}
         </div>
     </>
 }

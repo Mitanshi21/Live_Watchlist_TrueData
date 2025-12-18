@@ -5,9 +5,9 @@ import Search from "../components/Search";
 import TradeTable from "../components/TradeTable";
 import Login from "../components/Login";
 
-export default function MainList({tradeData, totalSubscribed, sendRequest, onUnsubscribe, symbolIdName}) {
+export default function MainList({tradeData, totalSubscribed, sendRequest, onUnsubscribe, symbolIdName, onLogout}) {
 
-    const [symbols, setSymbols] = useState(['SENSEX','TCS'])
+    const [symbols, setSymbols] = useState(['INFY','SENSEX'])
 
     const [allSymbols, setAllSymbols] = useState([]);
 
@@ -35,6 +35,8 @@ export default function MainList({tradeData, totalSubscribed, sendRequest, onUns
             />
 
             <h3>Total Subscribed:{totalSubscribed}</h3>
+
+            <button onClick={onLogout} className="logout">Logout</button>
         </div>
     </>
 }

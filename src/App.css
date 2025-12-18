@@ -120,10 +120,14 @@ body {
   white-space: nowrap;
 }
 
+.lt-cell{
+  text-align: right;
+}
+
 /* ===== TABLE ROW ===== */
 .trade-table td {
   padding: 9px;
-  text-align: center;
+  /* text-align: center; */
   border-bottom: 1px solid #f1f5f9;
   font-weight: 400;
 }
@@ -274,5 +278,17 @@ body {
   font-size: 12px;
   color: #64748b;
   text-align: center;
+}
+
+.logout{
+  padding: 1%;
+  background-color: #eb255d;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 4px;
 }
 

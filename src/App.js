@@ -10,6 +10,11 @@ function App() {
 
   const trade = useTradeSocket(criedential);
 
+  const handleLogout = () =>{
+    trade.onLogout()
+    setCriedential(null)
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -35,6 +40,7 @@ function App() {
                   sendRequest={trade.sendRequest}
                   onUnsubscribe={trade.onUnsubscribe}
                   symbolIdName={trade.symbolIdName}
+                  onLogout={handleLogout}
                 />
               ) : (
                 // 4️⃣ Connecting
