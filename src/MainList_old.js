@@ -1,14 +1,14 @@
 import axios from "axios";
-import { use, useEffect, useRef, useState } from "react"
+import { use, useEffect, useRef, useState, useCallback } from "react"
 import useWebSocket, { ReadyState } from "react-use-websocket"
 
-export default function MainList() {
+export default function MainList_Old() {
     const [symbol, setSymbol] = useState('')
     const [symbols, setSymbols] = useState([])
 
     const [allSymbols, setAllSymbols] = useState([]);
 
-    const [search, setSearch] = useState("");
+    const [search, setSearch] = useState(""); 
     const [showDropdown, setShowDropdown] = useState(false);
 
 
@@ -27,9 +27,9 @@ export default function MainList() {
         sendRequest();
     }, [symbols]);
 
-    const symbolFetchApi = async () => {
+    const symbolFetchApi = useCallback(async () => {
         // await axios.get('https://api.truedata.in/getAllSymbols?user=td133&password=mitanshi@133')
-        await axios.get('https://api.truedata.in/getAllSymbols?user=td133&password=mitanshi@133&segment=all')
+        await axios.get(`https://api.truedata.in/getAllSymbols?user=td133&password=mitanshi@133&segment=all`)
             .then(res => {
                 const arr = res.data.Records
                 const all = arr.map(item => item[1])
@@ -39,11 +39,11 @@ export default function MainList() {
             .catch(err => {
                 console.log(err)
             })
-    }
+    })
 
     useEffect(() => {
         symbolFetchApi()
-        // console.log(allSymbols);
+        console.log(allSymbols);
     }, [])
 
     const filteredSymbols = allSymbols
