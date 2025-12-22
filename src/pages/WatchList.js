@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { DockviewReact } from "dockview";
 import { symbolFetchApi } from "../services/symbolService";
 import Search from "../components/Search";
-import TradeTable from "../components/TradeTable";
+import WatchlistTable from "../components/WatchlistTable";
 
-export default function MainList({
+export default function WatchList({
     tradeData,
     totalSubscribed,
     sendRequest,
@@ -33,11 +33,11 @@ export default function MainList({
         );
     };
 
-    const TradePanel = (props) => {
+    const WatchPanel = (props) => {
         const { tradeData, onUnsubscribe, symbolIdName, symbols } = props.params;
 
         return (
-            <TradeTable
+            <WatchlistTable
                 tradeData={tradeData}
                 onUnsubscribe={onUnsubscribe}
                 symbolIdName={symbolIdName}
@@ -48,11 +48,11 @@ export default function MainList({
 
     const dockComponents = {
         search: SearchPanel,
-        tradeTable: TradePanel,
+        watchlistPanel: WatchPanel,
     };
 
     useEffect(() => {
-        const panel = window.__dockApi?.getPanel("watchlist");
+        const panel = window.__dockApi?.getPanel("watchlistPanel");
         panel?.update({
             params: {
                 tradeData,
@@ -95,9 +95,9 @@ export default function MainList({
                         });
 
                         api.addPanel({
-                            id: "watchlist",
-                            component: "tradeTable",
-                            title: "Live Watchlist",
+                            id: "watchlistPanel",
+                            component: "watchlistPanel",
+                            title: "Watchlist",
                             params: {
                                 tradeData,
                                 onUnsubscribe,

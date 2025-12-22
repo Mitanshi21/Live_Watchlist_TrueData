@@ -16,19 +16,19 @@ export default function Login({ onSuccess, error }) {
     navigate("/mainList");
   };
 
-  useEffect(() => {
-    const savedUser = localStorage.getItem("username");
-    const savedPass = localStorage.getItem("password");
+  // useEffect(() => {
+  //   const savedUser = localStorage.getItem("username");
+  //   const savedPass = localStorage.getItem("password");
 
-    if (savedUser && savedPass) {
-      setUsername(savedUser);
-      setPassword(savedPass);
+  //   if (savedUser && savedPass) {
+  //     setUsername(savedUser);
+  //     setPassword(savedPass);
 
-      // 🔑 IMPORTANT: authenticate, not just navigate
-      onSuccess(savedUser, savedPass);
-      navigate("/mainList");
-    }
-  }, []);
+  //     // 🔑 IMPORTANT: authenticate, not just navigate
+  //     onSuccess(savedUser, savedPass);
+  //     // navigate("/mainList");
+  //   }
+  // }, []);
 
   return (
     <div className="login-page">

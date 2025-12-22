@@ -1,6 +1,6 @@
 export default function TradeTable({ tradeData = {}, onUnsubscribe, symbolIdName = {}, symbols = [] }) {
 
-    return <div>
+    return <div style={{overflow:'auto'}}>
         <table className="trade-table">
             <thead>
                 <tr>
